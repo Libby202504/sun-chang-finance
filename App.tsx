@@ -32,6 +32,9 @@ const INITIAL_DATA: FinancialNode[] = [
 // ★★★ 您的 Google Apps Script 網址 (已修正) ★★★
 const DEFAULT_URL = "https://script.google.com/macros/s/AKfycbyhiDUf5J057Vtd1oXwxqUVVQjO6qZjd_3aiaxg9i9e4GRXG_PmcW-IEqkoduMNcQsM/exec";
 
+// 公司 LOGO 網址
+const LOGO_URL = "https://images.squarespace-cdn.com/content/v1/64b5f426543b3b4293f773b4/b3310023-455b-4375-9c2b-d30d952865c3/SUNCHANG_LOGO_FINAL-02.jpg";
+
 const App: React.FC = () => {
     const [data, setData] = useState<FinancialNode[]>(INITIAL_DATA);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -89,9 +92,14 @@ const App: React.FC = () => {
     return (
         <Router>
             <div className="flex h-screen bg-gray-50 font-sans text-slate-800 animate-fade-in">
-                {/* Mobile Menu Button */}
+                {/* Mobile Menu Button (With Logo) */}
                 <div className="md:hidden fixed top-0 left-0 w-full bg-sunchang-900 p-4 z-20 flex justify-between items-center shadow-md">
-                     <span className="text-white font-bold">上澄聯合財務</span>
+                     <div className="flex items-center space-x-3">
+                         <div className="bg-white p-1 rounded-md shadow-sm">
+                            <img src={LOGO_URL} alt="Logo" className="h-8 w-auto" />
+                         </div>
+                         <span className="text-white font-bold text-lg tracking-wide">上澄聯合財務</span>
+                     </div>
                      <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-white">
                          <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
                      </button>
@@ -99,7 +107,7 @@ const App: React.FC = () => {
 
                 {/* Mobile Sidebar Overlay */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden fixed inset-0 z-30 bg-gray-900" style={{marginTop: '60px'}}>
+                    <div className="md:hidden fixed inset-0 z-30 bg-gray-900" style={{marginTop: '72px'}}>
                         <Sidebar />
                     </div>
                 )}
@@ -110,15 +118,20 @@ const App: React.FC = () => {
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col overflow-hidden">
                     <header className="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-8 shadow-sm hidden md:flex">
-                        <div className="text-sm breadcrumbs text-gray-500 font-medium flex items-center gap-2">
-                             <span>上澄聯合 (Sun Chang Corp)</span>
-                             <span className="text-gray-300">/</span>
-                             <span>財務管理系統</span>
-                             {sheetUrl && (
-                                 <span className="ml-2 px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full border border-green-200">
-                                     <i className="fas fa-link mr-1"></i> 已連線至雲端
-                                 </span>
-                             )}
+                        <div className="flex items-center gap-4">
+                             {/* Desktop Logo in Header */}
+                             <img src={LOGO_URL} alt="Sun Chang Logo" className="h-9 w-auto" />
+                             
+                             <div className="text-sm breadcrumbs text-gray-500 font-medium flex items-center gap-2">
+                                 <span className="text-lg font-bold text-sunchang-900">上澄聯合 (Sun Chang Corp)</span>
+                                 <span className="text-gray-300">|</span>
+                                 <span>財務管理系統</span>
+                                 {sheetUrl && (
+                                     <span className="ml-2 px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full border border-green-200">
+                                         <i className="fas fa-link mr-1"></i> 已連線至雲端
+                                     </span>
+                                 )}
+                             </div>
                         </div>
                         <div className="flex items-center space-x-4">
                              {isLoading && (
@@ -160,7 +173,7 @@ const App: React.FC = () => {
                         </div>
                     </header>
 
-                    <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6 md:p-8 md:pt-8 pt-20">
+                    <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6 md:p-8 md:pt-8 pt-24 md:pt-8">
                         <Routes>
                             <Route path="/" element={<Dashboard data={data} />} />
                             <Route path="/receivables" element={<Receivables data={data} />} />
