@@ -32,8 +32,12 @@ const INITIAL_DATA: FinancialNode[] = [
 // ★★★ 您的 Google Apps Script 網址 (已修正) ★★★
 const DEFAULT_URL = "https://script.google.com/macros/s/AKfycbyhiDUf5J057Vtd1oXwxqUVVQjO6qZjd_3aiaxg9i9e4GRXG_PmcW-IEqkoduMNcQsM/exec";
 
-// 公司 LOGO 網址
-const LOGO_URL = "https://images.squarespace-cdn.com/content/v1/64b5f426543b3b4293f773b4/b3310023-455b-4375-9c2b-d30d952865c3/SUNCHANG_LOGO_FINAL-02.jpg";
+// Google Sheet 編輯網址 (請替換成您自己的 Google Sheet 編輯連結)
+const SHEET_EDIT_URL = "https://docs.google.com/spreadsheets/d/1MGfaEZ_TME-e1lfJeWomNELQTLg4GGGsQymmj1qfwa8/edit";
+
+// Logo 設定
+const LOGO_BLACK = "/logo-black.png"; // 用於淺色背景
+const LOGO_WHITE = "/logo-white.png"; // 用於深色背景
 
 const App: React.FC = () => {
     const [data, setData] = useState<FinancialNode[]>(INITIAL_DATA);
@@ -85,6 +89,10 @@ const App: React.FC = () => {
         loadData(newUrl);
     };
 
+    const openGoogleSheet = () => {
+        window.open(SHEET_EDIT_URL, '_blank');
+    };
+
     if (!isAuthenticated) {
         return <Login onLogin={() => setIsAuthenticated(true)} />;
     }
@@ -95,10 +103,9 @@ const App: React.FC = () => {
                 {/* Mobile Menu Button (With Logo) */}
                 <div className="md:hidden fixed top-0 left-0 w-full bg-sunchang-900 p-4 z-20 flex justify-between items-center shadow-md">
                      <div className="flex items-center space-x-3">
-                         <div className="bg-white p-1 rounded-md shadow-sm">
-                            <img src={LOGO_URL} alt="Logo" className="h-8 w-auto" />
-                         </div>
-                         <span className="text-white font-bold text-lg tracking-wide">上澄聯合財務</span>
+                         {/* 手機版標題使用白色 Logo，並移除白色底框，直接顯示在深色背景上 */}
+                         <img src={LOGO_WHITE} alt="Logo" className="h-8 w-auto object-contain" />
+                         <span className="text-white font-bold text-lg tracking-wide border-l border-sunchang-600 pl-3 ml-1">財務指揮中心</span>
                      </div>
                      <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-white">
                          <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
@@ -119,11 +126,10 @@ const App: React.FC = () => {
                 <div className="flex-1 flex flex-col overflow-hidden">
                     <header className="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-8 shadow-sm hidden md:flex">
                         <div className="flex items-center gap-4">
-                             {/* Desktop Logo in Header */}
-                             <img src={LOGO_URL} alt="Sun Chang Logo" className="h-9 w-auto" />
+                             {/* Desktop Header 使用黑色 Logo (背景為白) */}
+                             <img src={LOGO_BLACK} alt="Sun Chang Logo" className="h-10 w-auto object-contain" />
                              
                              <div className="text-sm breadcrumbs text-gray-500 font-medium flex items-center gap-2">
-                                 <span className="text-lg font-bold text-sunchang-900">上澄聯合 (Sun Chang Corp)</span>
                                  <span className="text-gray-300">|</span>
                                  <span>財務管理系統</span>
                                  {sheetUrl && (
@@ -176,8 +182,8 @@ const App: React.FC = () => {
                     <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-6 md:p-8 md:pt-8 pt-24 md:pt-8">
                         <Routes>
                             <Route path="/" element={<Dashboard data={data} />} />
-                            <Route path="/receivables" element={<Receivables data={data} />} />
-                            <Route path="/payables" element={<Payables data={data} />} />
+                            <Route path="/receivables" element={<Receivables data={data} onAddClick={openGoogleSheet} />} />
+                            <Route path="/payables" element={<Payables data={data} onAddClick={openGoogleSheet} />} />
                             <Route path="/analysis" element={<AIAdvisor data={data} />} />
                         </Routes>
                     </main>

@@ -4,9 +4,10 @@ import { generateReminderEmail } from '../services/geminiService';
 
 interface ReceivablesProps {
     data: FinancialNode[];
+    onAddClick: () => void;
 }
 
-const Receivables: React.FC<ReceivablesProps> = ({ data }) => {
+const Receivables: React.FC<ReceivablesProps> = ({ data, onAddClick }) => {
     const receivables = data.filter(n => n.type === TransactionType.INCOME);
     const [generatingId, setGeneratingId] = useState<string | null>(null);
     const [generatedEmail, setGeneratedEmail] = useState<string | null>(null);
@@ -65,7 +66,10 @@ const Receivables: React.FC<ReceivablesProps> = ({ data }) => {
                     >
                         <i className="fas fa-file-csv mr-2 text-green-600"></i> 匯出報表
                     </button>
-                    <button className="bg-sunchang-600 hover:bg-sunchang-700 text-white px-4 py-2 rounded-lg shadow transition-colors">
+                    <button 
+                        onClick={onAddClick}
+                        className="bg-sunchang-600 hover:bg-sunchang-700 text-white px-4 py-2 rounded-lg shadow transition-colors"
+                    >
                         <i className="fas fa-plus mr-2"></i> 新增時間節點
                     </button>
                 </div>

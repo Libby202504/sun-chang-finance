@@ -11,15 +11,15 @@ const Sidebar: React.FC = () => {
     return (
         <div className="w-64 bg-sunchang-900 min-h-screen flex flex-col shadow-xl z-10 hidden md:flex">
             <div className="p-6 flex flex-col items-center border-b border-sunchang-800">
-                <div className="bg-white p-2 rounded mb-3 w-full">
-                     {/* Using the logo provided in the prompt */}
+                <div className="mb-4 w-full px-2">
+                     {/* 使用白色字體 Logo，移除白色背景，直接顯示在深色背景上 */}
                     <img 
-                        src="https://images.squarespace-cdn.com/content/v1/64b5f426543b3b4293f773b4/b3310023-455b-4375-9c2b-d30d952865c3/SUNCHANG_LOGO_FINAL-02.jpg" 
+                        src="/logo-white.png" 
                         alt="Sun Chang Corp" 
                         className="w-full h-auto object-contain"
                     />
                 </div>
-                <h1 className="text-white font-bold text-lg tracking-wide text-center">財務指揮中心</h1>
+                <h1 className="text-white font-bold text-sm tracking-wider text-center opacity-80">財務指揮中心</h1>
             </div>
 
             <nav className="flex-1 px-4 py-6 space-y-2">

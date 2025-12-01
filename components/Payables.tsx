@@ -3,9 +3,10 @@ import { FinancialNode, TransactionType, ExpenseCategory } from '../types';
 
 interface PayablesProps {
     data: FinancialNode[];
+    onAddClick: () => void;
 }
 
-const Payables: React.FC<PayablesProps> = ({ data }) => {
+const Payables: React.FC<PayablesProps> = ({ data, onAddClick }) => {
     const payables = data.filter(n => n.type === TransactionType.EXPENSE);
     
     // Grouping logic for summary
@@ -72,7 +73,10 @@ const Payables: React.FC<PayablesProps> = ({ data }) => {
                     >
                         <i className="fas fa-file-csv mr-2 text-green-600"></i> 匯出報表
                     </button>
-                    <button className="bg-sunchang-600 hover:bg-sunchang-700 text-white px-4 py-2 rounded-lg shadow transition-colors">
+                    <button 
+                        onClick={onAddClick}
+                        className="bg-sunchang-600 hover:bg-sunchang-700 text-white px-4 py-2 rounded-lg shadow transition-colors"
+                    >
                         <i className="fas fa-plus mr-2"></i> 新增支付節點
                     </button>
                 </div>

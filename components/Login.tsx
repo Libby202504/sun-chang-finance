@@ -21,16 +21,16 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
             <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col">
-                <div className="bg-sunchang-900 p-8 text-center">
-                     <div className="bg-white p-3 rounded-lg inline-block mb-4 shadow-lg">
+                <div className="bg-sunchang-900 p-8 text-center flex flex-col items-center">
+                     {/* 移除白色背景框，使用白色字體 Logo 直接顯示 */}
+                     <div className="mb-4 w-48">
                         <img 
-                            src="https://images.squarespace-cdn.com/content/v1/64b5f426543b3b4293f773b4/b3310023-455b-4375-9c2b-d30d952865c3/SUNCHANG_LOGO_FINAL-02.jpg" 
+                            src="/logo-white.png" 
                             alt="Sun Chang Logo" 
-                            className="h-12 w-auto object-contain"
+                            className="w-full h-auto object-contain"
                         />
                     </div>
-                    <h1 className="text-2xl font-bold text-white tracking-wider">上澄聯合</h1>
-                    <p className="text-sunchang-100 text-sm mt-1">財務指揮中心 (FCC)</p>
+                    <p className="text-sunchang-100 text-sm mt-1 border-t border-sunchang-700 pt-3 w-full">財務指揮中心 (FCC)</p>
                 </div>
                 
                 <div className="p-8">
