@@ -15,7 +15,18 @@ const INITIAL_DATA: FinancialNode[] = [
     // Receivables (Income)
     { id: '1', dueDate: '2023-10-25', description: 'Project Alpha - 第一階段設計 (SD)', amount: 1250000, type: TransactionType.INCOME, status: 'OVERDUE', relatedParty: 'Skyline 開發' },
     { id: '2', dueDate: '2023-11-05', description: 'Project Beta - 施工圖繪製 (CD)', amount: 850000, type: TransactionType.INCOME, status: 'PENDING', relatedParty: 'Urban Living 建設' },
-    // ... (Keep existing mock data if needed for fallback)
+    { id: '3', dueDate: '2023-11-15', description: '市中心翻新案 - 執照圖 (Permit)', amount: 2000000, type: TransactionType.INCOME, status: 'PENDING', relatedParty: '市政府都市發展局' },
+    { id: '9', dueDate: '2023-11-20', description: '科技園區競圖案 - 簽約金', amount: 500000, type: TransactionType.INCOME, status: 'PENDING', relatedParty: '高科技園區管委會' },
+    
+    // Payables (Expenses - Subcontracting)
+    { id: '4', dueDate: '2023-10-30', description: '機電工程 (MEP) 顧問費 - 第一期', amount: 450000, type: TransactionType.EXPENSE, category: ExpenseCategory.SUBCONTRACT, status: 'PENDING', relatedParty: 'Volts & Pipes 機電顧問' },
+    { id: '5', dueDate: '2023-11-01', description: '結構計算與審查費', amount: 300000, type: TransactionType.EXPENSE, category: ExpenseCategory.SUBCONTRACT, status: 'PENDING', relatedParty: '穩固結構技師事務所' },
+    { id: '10', dueDate: '2023-11-10', description: '綠建築標章 (LEED) 認證顧問', amount: 150000, type: TransactionType.EXPENSE, category: ExpenseCategory.SUBCONTRACT, status: 'PENDING', relatedParty: 'GreenLife 顧問' },
+    
+    // Payables (Expenses - Payroll & Fixed)
+    { id: '6', dueDate: '2023-10-31', description: '十月份事務所薪資', amount: 1500000, type: TransactionType.EXPENSE, category: ExpenseCategory.PAYROLL, status: 'PENDING', relatedParty: '內部員工' },
+    { id: '7', dueDate: '2023-11-01', description: '總部辦公室租金', amount: 120000, type: TransactionType.EXPENSE, category: ExpenseCategory.FIXED, status: 'PENDING', relatedParty: '大樓管理委員會' },
+    { id: '8', dueDate: '2023-11-05', description: 'Autodesk & Adobe 軟體授權費', amount: 50000, type: TransactionType.EXPENSE, category: ExpenseCategory.FIXED, status: 'PENDING', relatedParty: '軟體經銷商' },
 ];
 
 // ★★★ 您的 Google Apps Script 網址 (已修正) ★★★
